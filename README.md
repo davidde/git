@@ -15,7 +15,8 @@ different letters for the same subcommand depending on the parameter(s)
 you're using ...
 
 In this plugin, great care care is taken to make sure all aliases are the most
-intuitive they can possibly be.
+intuitive they can possibly be.  
+On top of that, quite a few extra functions are added.
 
 
 ## Installation
