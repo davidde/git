@@ -86,11 +86,11 @@ alias glf='git_log_file'
 # Fancy 'git log --graph':
 alias glg='glog --graph'
 # Fancy 'git log --graph --oneline':
-alias glgo='git log --graph --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset%x09%C(bold)%s%x09%C(bold green)%D%Creset%n"'
+alias glgo='git log --graph --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s    %C(bold green)%D%Creset%n"'
 # Fancy 'git log --graph --stat':
 alias glgs='glog --graph --stat'
 # Fancy 'git log --oneline':
-alias glo='git log --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset    %C(bold)%s     %C(bold green)%D%Creset"'
+alias glo='git log --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s    %C(bold green)%D%Creset"'
 # Locate all commits in which a specific line of code (string) was first introduced:
 # Usage: gloc <Line-of-Code> [<file>]
 alias gloc='git_loc'
