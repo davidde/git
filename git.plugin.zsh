@@ -318,7 +318,7 @@ function git_reset_head() {
 # Show a specified file from stash x (defaults to lastest stash):
 function git_show_stash_file() {
   if [[ -z $1 ]]; then
-    echo "Usage:    git_show_stash_file <Line-of-Code> [<file>]"
+    echo "Usage:    git_show_stash_file <file> [<stash number>]"
     return 1
   fi
   git show stash@{${2:-0}}:$1
