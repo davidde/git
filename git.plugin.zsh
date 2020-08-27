@@ -191,13 +191,11 @@ function git_blame_line() {
     3=$2
   fi
   git blame $1 -L $2,$3
-  return 0
 }
 
 # Checkout parent/older commit:
 function git_checkout_parent() {
   git checkout HEAD~$1
-  return 0
 }
 
 # Checkout child/newer commit:
@@ -222,19 +220,16 @@ function git_checkout_child() {
   fi
 
   git checkout $child
-  return 0
 }
 
 function git_count() {
   echo "$(git rev-list --count HEAD) commits total up to current HEAD"
-  return 0
 }
 
 function git_count_all() {
   git shortlog -sn | cat
   echo -n '+ _______________________________________\n\n  '
   git_count
-  return 0
 }
 
 # List all git aliases from the README:
@@ -267,8 +262,6 @@ and may not correspond exactly with the actual alias implementation.
 
 If you want to see all alias implementations, run `alias`.
 If you want to see a specific implementation, run `which <alias/function>`.'
-
-  return 0
 }
 
 # Locate all commits in which a specific line of code (string) was first introduced:
@@ -278,7 +271,6 @@ function git_loc() {
     return 1
   fi
   gl -S $1 -- $2
-  return 0
 }
 
 # View the full change history of a single file:
@@ -296,7 +288,6 @@ function git_log_file() {
     3=$2
   fi
   glog -L $2,$3:$1
-  return 0
 }
 
 # Reset the head to a previous commit (defaults to direct parent):
@@ -312,7 +303,6 @@ function git_reset_head() {
     echo -n 'HEAD is now at '
     git log -1 --oneline | cat
   fi
-  return 0
 }
 
 # Show a specified file from stash x (defaults to lastest stash):
@@ -322,7 +312,6 @@ function git_show_stash_file() {
     return 1
   fi
   git show stash@{${2:-0}}:$1
-  return 0
 }
 
 # Print short status and log of latest commits:
@@ -333,5 +322,4 @@ function git_status_short() {
     git status -s && echo ''
   fi
   git log -${1:-3} --oneline | cat
-  return 0
 }
