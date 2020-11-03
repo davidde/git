@@ -146,7 +146,9 @@ plugins=(git)
 | **gtl**         | git tag --list                                            |
 | **gtls**        | git tag --list \| cat                                     |
 | **gwch**        | git whatchanged -p                                        |
-
+| **gignore**     | git update-index --assume-unchanged                       |
+| **gunignore**   | git update-index --no-assume-unchanged                    |
+| **gignored**    | git ls-files -v | grep "^[[:lower:]]"                     |
 &nbsp;
 
 > :warning: **Note:**  
