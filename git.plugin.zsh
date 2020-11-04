@@ -78,6 +78,11 @@ alias gfo='git fetch origin'
 # git graph branches:
 alias ggb='git log --graph --all --simplify-by-decoration --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n"'
 
+# Ignore already tracked files:
+alias gignore='git update-index --skip-worktree'
+alias gunignore='git update-index --no-skip-worktree'
+alias gignored='git ls-files -v | grep ^S'
+
 # Best default 'git log':
 alias gl='glog --name-status'
 # View the full change history of a single file:
@@ -172,9 +177,6 @@ alias gtls='git tag --list | cat'
 
 alias gwch='git whatchanged -p --date=format:"%A %B %d %Y at %H:%M" --pretty=format:"%n%n%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%+b%n"'
 
-alias gignore='git update-index --assume-unchanged'
-alias gunignore='git update-index --no-assume-unchanged'
-alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 
 # Functions
 ################
