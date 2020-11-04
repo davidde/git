@@ -6,11 +6,13 @@ alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
 alias galias='git_list_aliases'
+alias gai='git add --interactive'
 # Amend the most recent local commit:
 alias gam='git commit --amend -m' # Only change commit message (optionally 'git add' files)
 alias gama='git commit --amend -am' # Add all modified files and change commit message
 alias gan='git commit --amend --no-edit' # Keep commit message (optionally 'git add' files)
-alias gana='git commit --amend --no-edit -a' # Add files, but keep commit message
+alias gana='git commit --amend --no-edit -a' # Add all modified files, but keep commit message
+alias gap='git add --patch'
 
 alias gb='git branch'
 alias gba='git branch --all'
@@ -47,13 +49,14 @@ alias gcnt='git_count'
 alias gcnta='git_count_all'
 alias gco='git checkout'
 alias gcob='git checkout -b'
+alias gcobb='git checkout -' # "checkout branch before"
 # Check out a child commit:
 # Usage: gcoc [<number of commits after HEAD>]
 #   E.g. gcoc = gcoc 1   => checks out direct child
 #               gcoc 2   => checks out grandchild
 alias gcoc='git_checkout_child'
 alias gcod='git checkout develop'
-alias gcom='git checkout master'
+alias gcom='git checkout $(git_main_branch)'
 # Check out a parent commit:
 # Usage: gcop [<number of commits before HEAD>]
 #   E.g. gcop = gcop 1   => checks out direct parent
@@ -160,7 +163,8 @@ alias gsta='git stash apply'
 alias gstd='git stash drop'
 alias gstl='git stash list'
 alias gstls='git stash list | cat'
-alias gstp='git stash pop'
+alias gstp='git stash push'
+alias gstpop='git stash pop'
 # Show the diff between latest stash and local working tree:
 alias gstsl='git stash show -l' # = git diff stash@{0}
 # Show the diff between latest stash and its original parent commit:
@@ -262,8 +266,8 @@ function git_list_aliases() {
 
 
 Note:
-The commands above are optimized for memorability,
-and may not correspond exactly with the actual alias implementation.
+This cheatsheet is optimized for memorability,
+and may not correspond literally with the actual aliases.
 
 If you want to see all alias implementations, run `alias`.
 If you want to see a specific implementation, run `which <alias/function>`.'
@@ -293,6 +297,16 @@ function git_log_file() {
     3=$2
   fi
   glog -L $2,$3:$1
+}
+
+# Check if main exists and use instead of master:
+function git_main_branch() {
+  if [[ -n "$(git branch --list main)" ]]; then
+  # -n: True if length of string output is non-zero
+    echo main
+  else
+    echo master
+  fi
 }
 
 # Reset the head to a previous commit (defaults to direct parent):
