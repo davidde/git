@@ -32,24 +32,26 @@ plugins=(git)
 ```
 
 
-## Aliases
+## Aliases cheatsheet
 
 | Alias           | Command                                                   |
 |:----------------|:----------------------------------------------------------|
 | **g**           | git                                                       |
 | **ga**          | git add                                                   |
 | **gaa**         | git add --all                                             |
+| **gai**         | git add --interactive                                     |
 | **galias**      | git_list_aliases                                          |
 | **gam**         | **g**it commit --**a**mend -**m**                         |
 | **gama**        | **g**it commit --**a**mend -**m** --**a**ll               |
 | **gan**         | **g**it commit --**a**mend --**n**o-edit                  |
 | **gana**        | **g**it commit --**a**mend --**n**o-edit --**a**ll        |
+| **gap**         | git add --patch                                           |
 | **gb**          | git branch                                                |
 | **gba**         | git branch --all                                          |
 | **gbd**         | git branch --delete                                       |
 | **gbdf**        | git branch --delete --force                               |
 | **gbl**         | git blame                                                 |
-| **gbll**        | git_blame_line *\<file> [\<from line>] [\<to line>]*      |
+| **gbll**        | git_blame_line *\<file> [\<from line>] [\<to line>]*       |
 | **gbls**        | git branch --list \| cat                                  |
 | **gbs**         | git bisect                                                |
 | **gbsb**        | git bisect bad                                            |
@@ -59,43 +61,47 @@ plugins=(git)
 | **gc**          | git commit --verbose                                      |
 | **gcam**        | git commit -am                                            |
 | **gcamg**       | git commit -am --gpg-sign                                 |
-| **gcams**       | git commit -am --signoff                                  |
-| **gcf**         | git config                                                |
-| **gcfl**        | git config --list                                         |
-| **gcfls**       | git config --list \| cat                                  |
+| **gcams**       | git commit -am --signoff                                   |
+| **gcf**         | git config                                                 |
+| **gcfl**         | git config --list                                          |
+| **gcfls**        | git config --list \| cat                                   |
 | **gcl**         | git clone --recurse-submodules                            |
 | **gcm**         | git commit -m                                             |
 | **gcmg**        | git commit -m --gpg-sign                                  |
-| **gcms**        | git commit -m --signoff                                   |
+| **gcms**        | git commit -m --signoff                                    |
 | **gcnt**        | git_count                                                 |
 | **gcnta**       | git_count_all                                             |
 | **gco**         | git checkout                                              |
 | **gcob**        | git checkout -b                                           |
+| **gcobb**       | "checkout branch before": git checkout -                  |
 | **gcoc**        | git_checkout_child                                        |
 | **gcod**        | git checkout develop                                      |
-| **gcom**        | git checkout master                                       |
+| **gcom**        | git checkout $(git_main_branch)                           |
 | **gcop**        | git_checkout_parent                                       |
 | **gcp**         | git cherry-pick                                           |
 | **gcpa**        | git cherry-pick --abort                                   |
 | **gcpc**        | git cherry-pick --continue                                |
-| **gd**          | git diff                                                  |
-| **gds**         | git diff --staged                                         |
-| **gdst**        | git diff stash@{0}                                        |
-| **gdsth**       | git diff stash@{0} HEAD                                   |
-| **gdstp**       | git diff stash@{0}^ stash@{0}                             |
+| **gd**          | git diff                                                   |
+| **gds**         | git diff --staged                                          |
+| **gdst**        | git diff stash@{0}                                         |
+| **gdsth**       | git diff stash@{0} HEAD                                    |
+| **gdstp**       | git diff stash@{0}^ stash@{0}                              |
 | **gf**          | git fetch                                                 |
 | **gfo**         | git fetch origin                                          |
 | **ggb**         | "git graph branches"                                      |
+| **gignore**     | git update-index --skip-worktree                          |
+| **gunignore**   | git update-index --no-skip-worktree                       |
+| **gignored**    | git ls-files -v \| grep ^S                                 |
 | **gl**          | git log --name-status                                     |
-| **glf**         | git_log_file *\<file> [\<from line>] [\<to line>]*        |
+| **glf**         | git_log_file *\<file> [\<from line>] [\<to line>]*          |
 | **glg**         | git log --graph                                           |
 | **glgo**        | git log --graph --oneline                                 |
 | **glgs**        | git log --graph --stat                                    |
 | **glo**         | git log --oneline                                         |
-| **gloc**        | git_loc *\<Line-of-Code> [\<file>]*                       |
+| **gloc**        | git_loc *\<Line-of-Code> [\<file>]*                        |
 | **glog**        | git log                                                   |
 | **glr**         | git log --reverse --name-status                           |
-| **gls**         | git ls-files                                              |
+| **gls**         | git ls-files                                               |
 | **gm**          | git merge                                                 |
 | **gmom**        | git merge origin/master                                   |
 | **gmum**        | git merge upstream/master                                 |
@@ -123,18 +129,19 @@ plugins=(git)
 | **gremset**     | git remote set-url                                        |
 | **gremsh**      | git remote show                                           |
 | **gremv**       | git remote -v                                             |
-| **grl**         | git reflog                                                |
+| **grl**         | git reflog                                                 |
 | **grm**         | git rm                                                    |
 | **gs**          | git status                                                |
 | **gsh**         | git show                                                  |
-| **gshsf**       | git_show_stash_file *\<file> [\<stash number>]*           |
+| **gshsf**       | git_show_stash_file *\<file> [\<stash number>]*             |
 | **gss**         | git_status_short                                          |
 | **gst**         | git stash                                                 |
 | **gsta**        | git stash apply                                           |
 | **gstd**        | git stash drop                                            |
 | **gstl**        | git stash list                                            |
 | **gstls**       | git stash list \| cat                                     |
-| **gstp**        | git stash pop                                             |
+| **gstp**        | git stash push                                            |
+| **gstpop**      | git stash pop                                             |
 | **gstsl**       | git stash show -l                                         |
 | **gstsp**       | git stash show -p                                         |
 | **gsubi**       | git submodule update --init                               |
@@ -146,16 +153,21 @@ plugins=(git)
 | **gtl**         | git tag --list                                            |
 | **gtls**        | git tag --list \| cat                                     |
 | **gwch**        | git whatchanged -p                                        |
-| **gignore**     | git update-index --assume-unchanged                       |
-| **gunignore**   | git update-index --no-assume-unchanged                    |
-| **gignored**    | git ls-files -v | grep "^[[:lower:]]"                     |
 &nbsp;
 
 > :warning: **Note:**  
-> The commands above are optimized for memorability,  
-> and may not correspond exactly with the actual alias implementation.
-
-Check out usage, clarifications and alias/function implementation in
-your local [git.plugin.zsh](./git.plugin.zsh) or the
-[repo's source](https://github.com/davidde/git/blob/master/git.plugin.zsh).
+> 
+> The cheatsheet above is optimized for memorability,
+> and may not correspond literally with the actual aliases. E.g.:
+>   - "git graph branches"
+>   - `git log`'s are more verbose for fancier output
+>   - `git commit -m --gpg-sign` has its flags switched because `-m` needs to be last
+>   - Etc. etc.  
+> 
+> Check out all commands with usage and clarifications in your local
+> [git.plugin.zsh](./git.plugin.zsh) or the
+> [repo's source code](https://github.com/davidde/git/blob/master/git.plugin.zsh).  
+> 
+> Alternatively, run `alias` for a list of all aliases as they're implemented,
+> `galias` for this cheatsheet, or `which <alias/function>` for a specific implementation.
 
