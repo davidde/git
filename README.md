@@ -127,6 +127,7 @@ plugins=(git)
 | **grbm**        | git rebase master                                         |
 | **grem**        | git remote                                                |
 | **grema**       | git remote add                                            |
+| **gremrm**      | git remote rm                                             |
 | **gremset**     | git remote set-url                                        |
 | **gremsh**      | git remote show                                           |
 | **gremv**       | git remote -v                                             |
@@ -145,6 +146,8 @@ plugins=(git)
 | **gstpop**      | git stash pop                                             |
 | **gstsl**       | git stash show -l                                         |
 | **gstsp**       | git stash show -p                                         |
+| **gsub**        | git submodule                                             |
+| **gsuba**       | git submodule add                                         |
 | **gsubi**       | git submodule update --init                               |
 | **gsubu**       | git submodule update --remote --merge                     |
 | **gt**          | git tag                                                   |

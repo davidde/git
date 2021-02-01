@@ -5,8 +5,8 @@ alias g='git'
 
 alias ga='git add'
 alias gaa='git add --all'
-alias galias='git_list_aliases'
 alias gai='git add --interactive'
+alias galias='git_list_aliases'
 # Amend the most recent local commit:
 alias gam='git commit --amend -m' # Only change commit message (optionally 'git add' files)
 alias gama='git commit --amend -am' # Add all modified files and change commit message
@@ -143,6 +143,7 @@ alias grb='git rebase'
 alias grbm='git rebase master'
 alias grem='git remote'
 alias grema='git remote add'
+alias gremrm='git remote rm'
 alias gremset='git remote set-url'
 alias gremsh='git remote show'
 alias gremv='git remote -v'
@@ -169,6 +170,8 @@ alias gstpop='git stash pop'
 alias gstsl='git stash show -l' # = git diff stash@{0}
 # Show the diff between latest stash and its original parent commit:
 alias gstsp='git stash show -p' # = git diff stash@{0}^! = git diff stash@{0}^ stash@{0}
+alias gsub='git submodule'
+alias gsuba='git submodule add'
 alias gsubi='git submodule update --init' # Initialize submodules
 alias gsubu='git submodule update --remote --merge' # Update submodules
 
