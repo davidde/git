@@ -64,9 +64,10 @@ plugins=(git)
 | **gcamg**       | git commit -am --gpg-sign                                 |
 | **gcams**       | git commit -am --signoff                                  |
 | **gcf**         | git config                                                |
-| **gcfl**         | git config --list                                        |
-| **gcfls**        | git config --list \| cat                                 |
+| **gcfl**        | git config --list                                         |
+| **gcfls**       | git config --list \| cat                                  |
 | **gcl**         | git clone --recurse-submodules                            |
+| **gclcd**       | git_clone_and_cd                                          |
 | **gcm**         | git commit -m                                             |
 | **gcmg**        | git commit -m --gpg-sign                                  |
 | **gcms**        | git commit -m --signoff                                   |

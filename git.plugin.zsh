@@ -41,6 +41,7 @@ alias gcf='git config'
 alias gcfl='git config --list'
 alias gcfls='git config --list | cat'
 alias gcl='git clone --recurse-submodules'
+alias gclcd='git_clone_and_cd'
 alias gcm='git commit -m'
 alias gcmg='git commit --gpg-sign -m'
 alias gcms='git commit --signoff -m'
@@ -232,6 +233,14 @@ function git_checkout_child() {
   fi
 
   git checkout $child
+}
+
+function git_clone_and_cd() {
+  if [[ -z $2 ]]; then
+    git clone --recurse-submodules $1 && cd $(basename $1 .git)
+  else
+    git clone --recurse-submodules $1 $2 && cd $2
+  fi
 }
 
 function git_count() {
