@@ -101,7 +101,7 @@ alias glgs='glog --graph --stat'
 alias glo='git log --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s    %C(bold green)%D%Creset"'
 # Locate all commits in which a specific line of code (string) was first introduced:
 # Usage: gloc <Line-of-Code> [<file>]
-alias gloc='git_loc'
+alias gloc='git_locate_string'
 # Regular 'git log' in style:
 alias glog='git log --date=format:"%A %B %d %Y at %H:%M" --pretty=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n"' # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
 alias glr='glog --reverse --name-status'
@@ -277,7 +277,7 @@ If you want to see a specific implementation, run `which <alias/function>`.'
 }
 
 # Locate all commits in which a specific line of code (string) was first introduced:
-function git_loc() {
+function git_locate_string() {
   if [[ -z $1 ]]; then
     echo "Usage:    git_loc <Line-of-Code> [<file>]"
     return 1

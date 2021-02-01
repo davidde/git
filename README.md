@@ -99,7 +99,7 @@ plugins=(git)
 | **glgo**        | git log --graph --oneline                                 |
 | **glgs**        | git log --graph --stat                                    |
 | **glo**         | git log --oneline                                         |
-| **gloc**        | git_loc *\<Line-of-Code> [\<file>]*                       |
+| **gloc**        | git_locate_string *\<Line-of-Code> [\<file>]*             |
 | **glog**        | git log                                                   |
 | **glr**         | git log --reverse --name-status                           |
 | **gls**         | git ls-files                                              |
