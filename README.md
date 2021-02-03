@@ -150,6 +150,7 @@ plugins=(git)
 | **gsub**        | git submodule                                             |
 | **gsuba**       | git submodule add                                         |
 | **gsubi**       | git submodule update --init                               |
+| **gsubs**       | git submodule status                                      |
 | **gsubu**       | git submodule update --remote --merge                     |
 | **gt**          | git tag                                                   |
 | **gtam**        | git tag -am                                               |

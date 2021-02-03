@@ -174,6 +174,7 @@ alias gstsp='git stash show -p' # = git diff stash@{0}^! = git diff stash@{0}^ s
 alias gsub='git submodule'
 alias gsuba='git submodule add'
 alias gsubi='git submodule update --init' # Initialize submodules
+alias gsubs='git submodule status'
 alias gsubu='git submodule update --remote --merge' # Update submodules
 
 alias gt='git tag'
