@@ -35,6 +35,7 @@ alias gbss='git bisect start'
 
 alias gc='git commit --verbose'
 alias gcam='git commit -am'
+alias gcame='git commit --allow-empty-message -am ""'
 alias gcamg='git commit --gpg-sign -am'
 alias gcams='git commit --signoff -am'
 alias gcf='git config'

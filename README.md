@@ -61,6 +61,7 @@ plugins=(git)
 | **gbss**        | git bisect start                                          |
 | **gc**          | git commit --verbose                                      |
 | **gcam**        | git commit -am                                            |
+| **gcame**       | git commit -am --allow-empty-message ""                   |
 | **gcamg**       | git commit -am --gpg-sign                                 |
 | **gcams**       | git commit -am --signoff                                  |
 | **gcf**         | git config                                                |
