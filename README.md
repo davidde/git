@@ -105,8 +105,8 @@ plugins=(git)
 | **glr**         | git log --reverse --name-status                           |
 | **gls**         | git ls-files                                              |
 | **gm**          | git merge                                                 |
-| **gmom**        | git merge origin/master                                   |
-| **gmum**        | git merge upstream/master                                 |
+| **gmom**        | git merge origin/$(git_main_branch)                       |
+| **gmum**        | git merge upstream/$(git_main_branch)                     |
 | **gmv**         | git mv                                                    |
 | **gp**          | git push                                                  |
 | **gpd**         | git push --delete                                         |
@@ -125,7 +125,7 @@ plugins=(git)
 | **grhk**        | git_reset_head --keep                                     |
 | **grhs**        | git_reset_head --soft                                     |
 | **grb**         | git rebase                                                |
-| **grbm**        | git rebase master                                         |
+| **grbm**        | git rebase $(git_main_branch)                             |
 | **grem**        | git remote                                                |
 | **grema**       | git remote add                                            |
 | **gremrm**      | git remote rm                                             |
@@ -150,6 +150,8 @@ plugins=(git)
 | **gsub**        | git submodule                                             |
 | **gsuba**       | git submodule add                                         |
 | **gsubi**       | git submodule update --init                               |
+| **gsubpl**      | git submodule foreach git pull                            |
+| **gsubplom**    | git submodule foreach git pull origin $(git_main_branch)  |
 | **gsubs**       | git submodule status                                      |
 | **gsubu**       | git submodule update --remote --merge                     |
 | **gt**          | git tag                                                   |

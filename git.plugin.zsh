@@ -109,8 +109,8 @@ alias glr='glog --reverse --name-status'
 alias gls='git ls-files'
 
 alias gm='git merge'
-alias gmom='git merge origin/master'
-alias gmum='git merge upstream/master'
+alias gmom='git merge origin/$(git_main_branch)'
+alias gmum='git merge upstream/$(git_main_branch)'
 alias gmv='git mv'
 
 alias gp='git push'
@@ -141,7 +141,7 @@ alias grhhard='git_reset_head --hard'
 alias grhk='git_reset_head --keep'
 alias grhs='git_reset_head --soft'
 alias grb='git rebase'
-alias grbm='git rebase master'
+alias grbm='git rebase $(git_main_branch)'
 alias grem='git remote'
 alias grema='git remote add'
 alias gremrm='git remote rm'
@@ -174,6 +174,8 @@ alias gstsp='git stash show -p' # = git diff stash@{0}^! = git diff stash@{0}^ s
 alias gsub='git submodule'
 alias gsuba='git submodule add'
 alias gsubi='git submodule update --init' # Initialize submodules
+alias gsubpl='git submodule foreach git pull'
+alias gsubplom='git submodule foreach git pull origin $(git_main_branch)'
 alias gsubs='git submodule status'
 alias gsubu='git submodule update --remote --merge' # Update submodules
 
