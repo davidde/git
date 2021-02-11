@@ -64,6 +64,7 @@ plugins=(git)
 | **gcame**       | git commit -am --allow-empty-message ""                   |
 | **gcamg**       | git commit -am --gpg-sign                                 |
 | **gcams**       | git commit -am --signoff                                  |
+| **gcem**        | git commit --allow-empty -m                               |
 | **gcf**         | git config                                                |
 | **gcfl**        | git config --list                                         |
 | **gcfls**       | git config --list \| cat                                  |
