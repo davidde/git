@@ -261,7 +261,11 @@ function git_count_all() {
 
 # List all git aliases from the README:
 function git_list_aliases() {
-  filename=~/.oh-my-zsh/custom/plugins/git/README.md
+  # if ZSH_CUSTOM is not set, use the default location:
+  if [[ -z $ZSH_CUSTOM ]]; then
+    ZSH_CUSTOM=${ZSH}/custom
+  fi
+  filename=${ZSH_CUSTOM}/plugins/git/README.md
   from=$(grep -Fno '| **g** ' ${filename} | cut -f1 -d:)
   stop=$(grep -no '&nbsp;' ${filename} | cut -f1 -d:)
   to=$((stop - 2))
