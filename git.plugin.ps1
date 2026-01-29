@@ -14,29 +14,33 @@ function gaa {
 }
 
 function gai {
-  git add --interactive
+  git add --interactive @args
 }
 
-# Amend commit, modify commit message, optionally 'git add' files:
+# Amend commit; modify commit message, optionally 'git add' files:
 function gam {
   param ($message)
   git commit --amend -m $message
 }
 
-# Amend commit, modify commit message, and add all modified files:
+# Amend commit; modify commit message, and add all modified files:
 function gama {
   param ($message)
   git commit --amend -am $message
 }
 
-# Amend commit, keep commit message, optionally 'git add' files:
+# Amend commit; keep commit message, optionally 'git add' files:
 function gan {
   git commit --amend --no-edit
 }
 
-# Amend commit, keep commit message, and add all modified files:
+# Amend commit; keep commit message, and add all modified files:
 function gana {
   git commit --amend --no-edit -a
+}
+
+function gap {
+  git add --patch @args
 }
 
 function gb {
@@ -44,8 +48,53 @@ function gb {
 }
 
 # List all branches:
+function gba {
+  git branch --all
+}
+
+function gbd {
+  git branch --delete @args
+}
+
+function gbdf {
+  git branch --delete --force @args
+}
+
+function gbl {
+  git blame @args
+}
+
+# List all branches:
 function gbls {
   git branch --all
+}
+
+function gbs {
+  git bisect @args
+}
+
+function gbsb {
+  git bisect bad @args
+}
+
+function gbsg {
+  git bisect good @args
+}
+
+function gbsr {
+  git bisect reset
+}
+
+function gbss {
+  git bisect start
+}
+
+# Remove the builtin powershell `gc`:
+# (Alias for Get-Content)
+Remove-Item -Path Alias:gc -Force
+
+function gc {
+  git commit --verbose @args
 }
 
 function gcam {

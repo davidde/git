@@ -7,11 +7,17 @@ alias ga='git add'
 alias gaa='git add --all'
 alias gai='git add --interactive'
 alias galias='git_list_aliases'
-# Amend the most recent local commit:
-alias gam='git commit --amend -m' # Only change commit message (optionally 'git add' files)
-alias gama='git commit --amend -am' # Add all modified files and change commit message
-alias gan='git commit --amend --no-edit' # Keep commit message (optionally 'git add' files)
-alias gana='git commit --amend --no-edit -a' # Add all modified files, but keep commit message
+
+# Amend the most recent local commits.
+# Amend commit; modify commit message, optionally 'git add' files:
+alias gam='git commit --amend -m'
+# Amend commit; modify commit message, and add all modified files:
+alias gama='git commit --amend -am'
+# Amend commit; keep commit message, optionally 'git add' files:
+alias gan='git commit --amend --no-edit'
+# Amend commit; keep commit message, and add all modified files:
+alias gana='git commit --amend --no-edit -a'
+
 alias gap='git add --patch'
 
 alias gb='git branch'
@@ -26,7 +32,7 @@ alias gbl='git blame'
 #      = gbll README.md 10,10
 #      = git blame README.md -L 10,10
 alias gbll='git_blame_line'
-alias gbls='git branch --list | cat'
+alias gbls='git branch --all'
 alias gbs='git bisect'
 alias gbsb='git bisect bad'
 alias gbsg='git bisect good'
