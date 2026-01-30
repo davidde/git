@@ -98,18 +98,54 @@ function gc {
 }
 
 function gcam {
-  param ($message)
-  git commit -am $message
+  git commit -am @args
+}
+
+function gcame {
+  git commit --allow-empty-message -am ""
+}
+
+function gcamg {
+  git commit --gpg-sign -am @args
+}
+
+function gcams {
+  git commit --signoff -am @args
+}
+
+function gcamu {
+  git commit -am "Update"
+}
+
+# Create a commit without any changes, e.g. for testing CI/CD:
+# E.g. git commit --allow-empty -m "Triggering build"
+function gcem {
+  git commit --allow-empty -m @args
+}
+function gcf {
+  git config @args
+}
+
+function gcfg {
+  git config --global @args
+}
+
+function gcfl {
+  git config --local @args
+}
+
+function gcfls {
+  git config --list @args
 }
 
 # Git clone and cd into project:
 function gcl {
   param ($url, $path)
   if ($path) {
-    git clone @args $url $path
+    git clone --recurse-submodules @args $url $path
     Set-Location $path
   } else {
-    git clone @args $url
+    git clone --recurse-submodules @args $url
     Set-Location ([io.path]::GetFileNameWithoutExtension($url))
   }
 }
@@ -119,20 +155,117 @@ function gcl {
 Remove-Item -Path Alias:gcm -Force
 
 function gcm {
-  param ($message)
-  git commit -m $message
+  git commit -m @args
+}
+
+function gcmg {
+  git commit --gpg-sign -m @args
+}
+
+function gcms {
+  git commit --signoff -m @args
+}
+
+# Count the number of commits on a branch:
+function gcnt() {
+  git shortlog -sn
+  Write-Output "  + ___________________________________`n"
+  Write-Output "    $(git rev-list --count HEAD) commits total up to current HEAD`n"
 }
 
 function gco {
   git checkout @args
 }
 
+function gcob {
+  git checkout -b @args
+}
+
+# git checkout branch before:
+# checkout the branch you were on right before switching to the current one
+function gcobb {
+  git checkout -
+}
+
+# Checkout a child (younger) commit:
+# Usage: gcoc [<number of commits after HEAD>]
+#   E.g. gcoc = gcoc 1   => checks out direct child
+#               gcoc 2   => checks out grandchild
+function gcoc() {
+  $children = $(git --no-pager log --all --ancestry-path ^HEAD --format=format:%H)
+  Write-Host ""
+
+  if (-not $children) {
+    Write-Host "This commit does not have any children, HEAD remains at:`n     "  -NoNewline
+    git --no-pager log -1 --oneline
+    Write-Host ""
+    return
+  } else {
+    # Take the first child, or the one specified by the input arg:
+    $count = if ($args[0]) { $args[0] } else { 1 }
+    $child = $(Write-Output $children | Select-Object -Last $count | Select-Object -First 1)
+    # If the child to checkout is at the branch's tip ...
+    if (@($children).Count -le $count) {
+      $branches = $(git branch --contains $child).Replace('*', '').Trim() -join ' '
+      # ... and there is only 1 branch with that commit ...
+      if ($branches -notmatch ' ') {
+        # ... checkout the branch itself instead of the specific hash:
+        $child = $branches
+      }
+    }
+  }
+
+  git checkout $child
+}
+
+function gcod {
+  git checkout develop
+}
+
 function gcof {
   git checkout -f @args
 }
 
+# Check if main branch exists, otherwise use master branch:
+function git_main_branch() {
+  if (git branch --list main) {
+    "main"
+  } else {
+    "master"
+  }
+}
+
 function gcom {
-  git checkout main
+  git checkout $(git_main_branch)
+}
+
+# Checkout a parent (older) commit:
+# Usage: gcop [<number of commits before HEAD>]
+#   E.g. gcop = gcop 1   => checks out direct parent
+#               gcop 2   => checks out grandparent
+function gcop() {
+  param([int]$count = 1)
+  git checkout HEAD~$count
+}
+
+function gcp() {
+  git cherry-pick @args
+}
+
+function gcpa() {
+  git cherry-pick --abort
+}
+
+function gcpc() {
+  git cherry-pick --continue
+}
+
+function gcpq() {
+  git cherry-pick --quit
+}
+
+function gcps() {
+  git cherry-pick --skip
 }
 
 function gd {

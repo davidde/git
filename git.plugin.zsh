@@ -45,29 +45,33 @@ alias gcame='git commit --allow-empty-message -am ""'
 alias gcamg='git commit --gpg-sign -am'
 alias gcams='git commit --signoff -am'
 alias gcamu='git commit -am "Update"'
+# Create a commit without any changes, e.g. for testing CI/CD:
+# E.g. git commit --allow-empty -m "Triggering build"
 alias gcem='git commit --allow-empty -m'
 alias gcf='git config'
-alias gcfl='git config --list'
-alias gcfls='git config --list | cat'
-alias gcl='git clone --recurse-submodules'
-alias gclcd='git_clone_and_cd'
+alias gcfg='git config --global'
+alias gcfl='git config --local'
+alias gcfls='git config --list'
+alias gcl='git_clone_and_cd'
 alias gcm='git commit -m'
 alias gcmg='git commit --gpg-sign -m'
 alias gcms='git commit --signoff -m'
 # Count the number of commits on a branch:
 alias gcnt='git_count'
-alias gcnta='git_count_all'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias gcobb='git checkout -' # "checkout branch before"
-# Check out a child commit:
+# git checkout branch before:
+# checkout the branch you were on right before switching to the current one
+alias gcobb='git checkout -'
+# Checkout a child (younger) commit:
 # Usage: gcoc [<number of commits after HEAD>]
 #   E.g. gcoc = gcoc 1   => checks out direct child
 #               gcoc 2   => checks out grandchild
 alias gcoc='git_checkout_child'
 alias gcod='git checkout develop'
+alias gcof='git checkout -f'
 alias gcom='git checkout $(git_main_branch)'
-# Check out a parent commit:
+# Checkout a parent (older) commit:
 # Usage: gcop [<number of commits before HEAD>]
 #   E.g. gcop = gcop 1   => checks out direct parent
 #               gcop 2   => checks out grandparent
@@ -75,6 +79,8 @@ alias gcop='git_checkout_parent'
 alias gcp='git cherry-pick'
 alias gcpa='git cherry-pick --abort'
 alias gcpc='git cherry-pick --continue'
+alias gcpq='git cherry-pick --quit'
+alias gcps='git cherry-pick --skip'
 
 alias gd='git diff'
 alias gds='git diff --staged'
@@ -256,13 +262,9 @@ function git_clone_and_cd() {
 }
 
 function git_count() {
-  echo "$(git rev-list --count HEAD) commits total up to current HEAD"
-}
-
-function git_count_all() {
   git shortlog -sn | cat
   echo -n '+ _______________________________________\n\n  '
-  git_count
+  echo "$(git rev-list --count HEAD) commits total up to current HEAD"
 }
 
 # List all git aliases from the README:
@@ -323,7 +325,7 @@ function git_log_file() {
   glog -L $2,$3:$1
 }
 
-# Check if main exists and use instead of master:
+# Check if main branch exists, otherwise use master branch:
 function git_main_branch() {
   if [[ -n "$(git branch --list main)" ]]; then
   # -n: True if length of string output is non-zero
