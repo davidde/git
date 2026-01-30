@@ -276,6 +276,41 @@ function gds {
   git --no-pager diff --staged @args
 }
 
+# Show the diff between latest stash and local working tree:
+# = git stash show -l:
+function gdst {
+  git --no-pager diff 'stash@{0}' @args
+}
+
+# Show the diff between latest stash and HEAD:
+function gdsth {
+  git --no-pager diff 'stash@{0}' HEAD
+}
+
+# Show the diff between latest stash and its original parent commit:
+# = git stash show -p
+function gdstp {
+  git --no-pager diff 'stash@{0}^' 'stash@{0}'
+}
+
+function gf {
+  git fetch @args
+}
+
+function gfo {
+  git fetch origin @args
+}
+
+# git graph commits:
+function gg {
+  git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n" @args
+}
+
+# git graph branches:
+function ggb {
+  gg --simplify-by-decoration
+}
+
 # Defaults to full commit log when no args provided;
 # but allows passing `-[number]` to get a specific amount of commits
 function glg {

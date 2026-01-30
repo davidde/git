@@ -82,20 +82,25 @@ alias gcpc='git cherry-pick --continue'
 alias gcpq='git cherry-pick --quit'
 alias gcps='git cherry-pick --skip'
 
-alias gd='git diff'
-alias gds='git diff --staged'
+alias gd='git --no-pager diff'
+alias gds='git --no-pager diff --staged'
 # Show the diff between latest stash and local working tree:
-alias gdst='git diff stash@{0}' # = git stash show -l
+# = git stash show -l:
+alias gdst='git --no-pager diff stash@{0}'
 # Show the diff between latest stash and HEAD:
-alias gdsth='git diff stash@{0} HEAD'
+alias gdsth='git --no-pager diff stash@{0} HEAD'
 # Show the diff between latest stash and its original parent commit:
-alias gdstp='git diff stash@{0}^ stash@{0}' # = git stash show -p
+# = git stash show -p:
+alias gdstp='git --no-pager diff stash@{0}^ stash@{0}'
 
 alias gf='git fetch'
 alias gfo='git fetch origin'
 
+# git graph commits:
+alias gg='git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n"'
+
 # git graph branches:
-alias ggb='git log --graph --all --simplify-by-decoration --date=format:"%d/%m/%y" --pretty=format:"%C(yellow)%h%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n"'
+alias ggb='gg --simplify-by-decoration'
 
 # Ignore already tracked files:
 alias gignore='git update-index --skip-worktree'
