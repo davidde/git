@@ -17,25 +17,29 @@ function gai {
   git add --interactive @args
 }
 
-# Amend commit; modify commit message, optionally 'git add' files:
 function gam {
+  # Amend commit; modify commit message, optionally 'git add' files:
+
   param ($message)
   git commit --amend -m $message
 }
 
-# Amend commit; modify commit message, and add all modified files:
 function gama {
+  # Amend commit; modify commit message, and add all modified files:
+
   param ($message)
   git commit --amend -am $message
 }
 
-# Amend commit; keep commit message, optionally 'git add' files:
 function gan {
+  # Amend commit; keep commit message, optionally 'git add' files:
+
   git commit --amend --no-edit
 }
 
-# Amend commit; keep commit message, and add all modified files:
 function gana {
+  # Amend commit; keep commit message, and add all modified files:
+
   git commit --amend --no-edit -a
 }
 
@@ -47,8 +51,9 @@ function gb {
   git branch @args
 }
 
-# List all branches:
 function gba {
+  # List all branches:
+
   git branch --all
 }
 
@@ -64,8 +69,9 @@ function gbl {
   git blame @args
 }
 
-# List all branches:
 function gbls {
+  # List all branches:
+
   git branch --all
 }
 
@@ -117,11 +123,13 @@ function gcamu {
   git commit -am "Update"
 }
 
-# Create a commit without any changes, e.g. for testing CI/CD:
-# E.g. git commit --allow-empty -m "Triggering build"
 function gcem {
+  # Create a commit without any changes, e.g. for testing CI/CD:
+  # E.g. git commit --allow-empty -m "Triggering build"
+
   git commit --allow-empty -m @args
 }
+
 function gcf {
   git config @args
 }
@@ -138,8 +146,9 @@ function gcfls {
   git config --list @args
 }
 
-# Git clone and cd into project:
 function gcl {
+  # Git clone and cd into project:
+
   param ($url, $path)
   if ($path) {
     git clone --recurse-submodules @args $url $path
@@ -166,8 +175,9 @@ function gcms {
   git commit --signoff -m @args
 }
 
-# Count the number of commits on a branch:
 function gcnt() {
+  # Count the number of commits on a branch:
+
   git shortlog -sn
   Write-Output "  + ___________________________________`n"
   Write-Output "    $(git rev-list --count HEAD) commits total up to current HEAD`n"
@@ -181,17 +191,20 @@ function gcob {
   git checkout -b @args
 }
 
-# git checkout branch before:
-# checkout the branch you were on right before switching to the current one
+
 function gcobb {
+  # "git checkout branch before":
+  # Checkout the branch you were on right before switching to the current one
+
   git checkout -
 }
 
-# Checkout a child (younger) commit:
-# Usage: gcoc [<number of commits after HEAD>]
-#   E.g. gcoc = gcoc 1   => checks out direct child
-#               gcoc 2   => checks out grandchild
 function gcoc() {
+  # Checkout a child (younger) commit:
+  # Usage: gcoc [<number of commits after HEAD>]
+  #   E.g. gcoc = gcoc 1   => checks out direct child
+  #               gcoc 2   => checks out grandchild
+
   $children = $(git --no-pager log --all --ancestry-path ^HEAD --format=format:%H)
   Write-Host ""
 
@@ -226,8 +239,9 @@ function gcof {
   git checkout -f @args
 }
 
-# Check if main branch exists, otherwise use master branch:
 function git_main_branch() {
+  # Check if main branch exists, otherwise use master branch:
+
   if (git branch --list main) {
     "main"
   } else {
@@ -239,11 +253,12 @@ function gcom {
   git checkout $(git_main_branch)
 }
 
-# Checkout a parent (older) commit:
-# Usage: gcop [<number of commits before HEAD>]
-#   E.g. gcop = gcop 1   => checks out direct parent
-#               gcop 2   => checks out grandparent
 function gcop() {
+  # Checkout a parent (older) commit:
+  # Usage: gcop [<number of commits before HEAD>]
+  #   E.g. gcop = gcop 1   => checks out direct parent
+  #               gcop 2   => checks out grandparent
+
   param([int]$count = 1)
   git checkout HEAD~$count
 }
@@ -276,20 +291,23 @@ function gds {
   git --no-pager diff --staged @args
 }
 
-# Show the diff between latest stash and local working tree:
-# = git stash show -l:
 function gdst {
+  # Show the diff between latest stash and local working tree:
+  # = git stash show -l:
+
   git --no-pager diff 'stash@{0}' @args
 }
 
-# Show the diff between latest stash and HEAD:
 function gdsth {
+  # Show the diff between latest stash and HEAD:
+
   git --no-pager diff 'stash@{0}' HEAD
 }
 
-# Show the diff between latest stash and its original parent commit:
-# = git stash show -p
 function gdstp {
+  # Show the diff between latest stash and its original parent commit:
+  # = git stash show -p
+
   git --no-pager diff 'stash@{0}^' 'stash@{0}'
 }
 
@@ -301,32 +319,73 @@ function gfo {
   git fetch origin @args
 }
 
-# git graph commits:
 function gg {
+  # git graph (all commits):
+
   git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n" @args
 }
 
-# git graph branches:
 function ggb {
+  # git graph branches:
+
   gg --simplify-by-decoration
 }
 
-# Defaults to full commit log when no args provided;
-# but allows passing `-[number]` to get a specific amount of commits
-function glg {
-  param ($num)
-  Write-Output ""
-  git --no-pager log $num --name-status --reverse --date=format:"%A %B %d %Y at %H:%M" --pretty=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n"
-  Write-Output "`r`n"
+function ggbo {
+  # git graph branches --oneline:
+
+  ggo --simplify-by-decoration
+}
+
+function ggo {
+  # git graph --oneline (all commits):
+
+  git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n" @args
+}
+
+function gig {
+  # Ignore already tracked files:
+
+  git update-index --skip-worktree @args
+}
+
+function gunig {
+  # Unignore ignored files:
+
+  git update-index --no-skip-worktree @args
+}
+
+function glsig {
+  # List ignored files:
+
+  git ls-files -v | Select-String "^S"
 }
 
 # Remove the builtin powershell `gl`:
 # (Alias for Get-Location)
 Remove-Item -Path Alias:gl -Force
 
-# Always defaults to 10 commits git log:
 function gl {
-  glg -10
+  # "git log --name-status" that always defaults to 10 commits:
+
+  glog -10
+}
+
+function glo {
+  # "git log --oneline":
+
+  git --no-pager log --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset"
+}
+
+function glog {
+  # "git log" that defaults to full commit log when no args are provided;
+  # but allows passing `-[number]` to get a specific amount of commits
+
+  param ($num)
+  Write-Output ""
+  git --no-pager log $num --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" @args
+  # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
+  Write-Output ""
 }
 
 function glsf {
@@ -448,8 +507,9 @@ function gremao {
   git remote add origin @args
 }
 
-# List all remotes:
 function gremls {
+  # List all remotes:
+
   git remote -v
 }
 
