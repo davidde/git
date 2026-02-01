@@ -412,13 +412,59 @@ function glss {
   git config --file .gitmodules --name-only --get-regexp path
 }
 
+# Remove the builtin powershell `gm`:
+# (Alias for Get-Member)
+Remove-Item -Path Alias:gm -Force
+
+function gm {
+  git merge @args
+}
+
+# Try to merge origin/main into the currently active branch:
+function gmom {
+  git merge "origin/$(git_main_branch)"
+}
+
+# Try to merge upstream/main into the currently active branch:
+function gmum {
+  git merge "upstream/$(git_main_branch)"
+}
+
 function gmv {
-  param ($source, $dest)
-  git mv $source $dest
+  git mv @args
 }
 
 function gph {
   git push @args
+}
+
+function gphd {
+  # Delete a branch from a remote:
+  # Usage: gphd origin feat-branch
+
+  git push --delete @args
+}
+
+function gphdo {
+  # Delete a branch from the origin remote:
+  # Usage: gphdo feat-branch
+
+  git push --delete origin @args
+}
+
+function gphf {
+  git push --force-with-lease @args
+}
+
+function gphff {
+  git push --force @args
+}
+
+function gpht {
+  git push
+  if ($?) {
+    git push --tags
+  }
 }
 
 function gphu {
@@ -449,6 +495,21 @@ function gphuom {
 
 function gpl {
   git pull @args
+}
+
+function gpla {
+  # Stash "dirty" uncommitted changes, do git pull, and pop
+  # the uncommitted changes back out after pull completes:
+
+  git pull --autostash @args
+}
+
+function gplr {
+  git pull --rebase @args
+}
+
+function gplrs {
+  git pull --recurse-submodules @args
 }
 
 function gr {

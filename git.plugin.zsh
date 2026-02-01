@@ -133,16 +133,40 @@ alias glsr='git remote -v'
 alias glss='git config --file .gitmodules --name-only --get-regexp path'
 
 alias gm='git merge'
+# Try to merge origin/main into the currently active branch:
 alias gmom='git merge origin/$(git_main_branch)'
+# Try to merge upstream/main into the currently active branch:
 alias gmum='git merge upstream/$(git_main_branch)'
 alias gmv='git mv'
 
-alias gp='git push'
-alias gpd='git push --delete'
-alias gpdo='git push --delete origin'
-alias gpf='git push --force-with-lease'
-alias gpt='git push && git push --tags'
+alias gph='git push'
+# Delete a branch from a remote:
+# Usage: gphd origin feat-branch
+alias gphd='git push --delete'
+# Delete a branch from the origin remote:
+# Usage: gphdo feat-branch
+alias gphdo='git push --delete origin'
+alias gphf='git push --force-with-lease'
+alias gphff='git push --force'
+alias gpht='git push && git push --tags'
+# The `-u` or `--set-upstream` flag configures a local branch
+# to track a remote branch. This initializes a new branch on the remote,
+# and tells Git that the remote branch is the default "upstream"
+# counterpart of the local branch.
+# Usage: gphu origin main
+alias gphu='git push -u'
+# Transfer the specified local branch to the 'origin' remote repository,
+# and set the local branch to track its remote equivalent.
+# Usage: gphuo main
+alias gphuo='git push -u origin'
+# Transfer the 'main' branch to the 'origin' remote repository,
+# and set the local 'main' to track the remote 'main'.
+# Usage: gphuom
+alias gphuom='git push -u origin main'
 alias gpl='git pull'
+# Stash "dirty" uncommitted changes, do git pull, and pop
+# the uncommitted changes back out after pull completes:
+alias gpla='git pull --autostash'
 alias gplr='git pull --rebase'
 alias gplrs='git pull --recurse-submodules'
 
