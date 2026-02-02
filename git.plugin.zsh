@@ -170,30 +170,58 @@ alias gpla='git pull --autostash'
 alias gplr='git pull --rebase'
 alias gplrs='git pull --recurse-submodules'
 
+# 'git reset' flags:
+# * --mixed (default): Keep changes, but unstage them
+# * --hard: Remove changes, including anything uncommitted (Dangerous!)
+# * --keep: Safer version of `--hard`; reset will be
+#           aborted if there are any dirty files
+# * --soft: Keep changes, and keep them staged
+
+# 'git reset' default behaviour = '--mixed' flag:
+# Keep changes, but unstage them
+alias gr='git reset'
+# git reset head:
+# `git reset` defaults to the `--mixed` flag, which means
+# it will keep the changes, but unstage them.
+# => This resets the latest commit (= HEAD = HEAD~0) of the branch,
+# by default to the previous commit (= HEAD~ = HEAD~1).
+# Provide a number argument to reset to a commit further back.
+# Usage: grh [<number of commits before HEAD>]
+#   E.g. grh = grh 1 => Reset HEAD to previous commit
+#              grh 2 => Reset HEAD 2 commits
+alias grh='git_reset_head --mixed'
+
+# `--hard` flag: Remove changes, including anything uncommitted (Dangerous!)
 # `grhard` is intentionally more verbose because `--hard` is unsafe;
 # there is no way to recover uncommitted changes.
-# In general the `--keep` flag is preferable. It will do exactly the same,
+# In general, the `--keep` flag is preferable. It will do exactly the same,
 # but abort if a file has uncommitted changes.
 # Having to type 'grhard' in full will make us think twice
-# about whether we REALLY want to get rid of all dirty files.
-alias gr='git reset --mixed' # Keep changes, but unstage them (`--mixed` = default behaviour)
-alias grhard='git reset --hard' # Remove changes, including anything uncommitted (Dangerous!)
-alias grk='git reset --keep' # Safer version of `--hard`: reset is aborted if a file is dirty
-alias grs='git reset --soft' # Keep changes, and keep them staged
-# Reset HEAD to a previous commit:
-# Usage: grh [<number of commits before HEAD>]
-#   E.g. grh = grh 1   => Reset HEAD to previous commit
-#              grh 2   => Reset HEAD 2 commits
-alias grh='git_reset_head --mixed'
+# about whether we really want to get rid of all dirty files.
+alias grhard='git reset --hard'
 alias grhhard='git_reset_head --hard'
+# `--keep` flag = Safer version of `--hard`:
+# reset will be aborted if there are any dirty files
 alias grhk='git_reset_head --keep'
+# `--soft` flag: Keep changes, and keep them staged
 alias grhs='git_reset_head --soft'
+alias grk='git reset --keep'
+alias grs='git reset --soft'
+
 alias grb='git rebase'
 alias grbm='git rebase $(git_main_branch)'
+
+alias gre='git restore'
+alias grea='git restore .'
+
 alias grem='git remote'
 alias grema='git remote add'
+alias gremao='git remote add origin'
+alias gremls='git remote -v'
 alias gremrm='git remote rm'
+alias gremrmo='git remote rm origin'
 alias gremset='git remote set-url'
+alias gremseto='git remote set-url origin'
 alias gremsh='git remote show'
 alias gremv='git remote -v'
 alias grl='git reflog' # Useful to restore lost commits after reset
@@ -233,8 +261,6 @@ alias gtsm='git tag -sm' # GPG sign an annotated tag
 alias gtd='git tag --delete'
 alias gtl='git tag --list'
 alias gtls='git tag --list | cat'
-
-alias gwch='git whatchanged -p --date=format:"%A %B %d %Y at %H:%M" --format=format:"%n%n%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%+b%n"'
 
 
 # Functions

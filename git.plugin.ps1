@@ -108,7 +108,7 @@ function gcam {
 }
 
 function gcame {
-  git commit --allow-empty-message -am ""
+  git commit --allow-empty-message -am '""'
 }
 
 function gcamg {
@@ -381,9 +381,9 @@ function glog {
   # "git log" that defaults to full commit log when no args are provided;
   # but allows passing `-[number]` to get a specific amount of commits
 
-  param ($num)
+  param ($count)
   Write-Output ""
-  git --no-pager log $num --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" @args
+  git --no-pager log $count --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" @args
   # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
   Write-Output ""
 }
@@ -513,41 +513,140 @@ function gplrs {
 }
 
 function gr {
+  # 'git reset' flags:
+  # * --mixed (default): Keep changes, but unstage them
+  # * --hard: Remove changes, including anything uncommitted (Dangerous!)
+  # * --keep: Safer version of `--hard`; reset will be
+  #           aborted if there are any dirty files
+  # * --soft: Keep changes, and keep them staged
+
   git reset @args
+}
+
+function grh {
+  # git reset head:
+  # `git reset` defaults to the `--mixed` flag, which means
+  # it will keep the changes, but unstage them.
+  # => This resets the latest commit (= HEAD = HEAD~0) of the branch,
+  # by default to the previous commit (= HEAD~ = HEAD~1).
+  # Provide a number argument to reset to a commit further back.
+  # Usage: grh [<number of commits before HEAD>]
+  #   E.g. grh = grh 1 => Reset HEAD to previous commit
+  #              grh 2 => Reset HEAD 2 commits
+
+  param ($count)
+  git reset HEAD~$count @args
+}
+
+function grhard {
+  # `--hard` flag: Remove changes, including anything uncommitted (Dangerous!)
+  # `grhard` is intentionally more verbose because `--hard` is unsafe;
+  # there is no way to recover uncommitted changes.
+  # In general, the `--keep` flag is preferable. It will do exactly the same,
+  # but abort if a file has uncommitted changes.
+  # Having to type 'grhard' in full will make us think twice
+  # about whether we really want to get rid of all dirty files.
+
+  git reset --hard @args
+}
+
+function grhhard {
+  # "git reset head --hard":
+  # The `--hard` flag will remove all changes, including anything
+  # uncommitted! (Beware; there is no way to recover uncommitted changes!)
+  # => This resets the latest commit (= HEAD = HEAD~0) of the branch,
+  # by default to the previous commit (= HEAD~ = HEAD~1).
+  # Provide a number argument to reset to a commit further back.
+  # Usage: grhhard [<number of commits before HEAD>]
+  #   E.g. grhhard = grhhard 1 => Reset HEAD to previous commit
+  #                  grhhard 2 => Reset HEAD 2 commits
+
+  param ($count)
+  grh $count --hard
+}
+
+function grhk {
+  # "git reset head --keep":
+  # The `--keep` flag will abort the reset if there are any dirty files.
+  # => This resets the latest commit (= HEAD = HEAD~0) of the branch,
+  # by default to the previous commit (= HEAD~ = HEAD~1).
+  # Provide a number argument to reset to a commit further back.
+  # Usage: grhk [<number of commits before HEAD>]
+  #   E.g. grhk = grhk 1 => Reset HEAD to previous commit
+  #               grhk 2 => Reset HEAD 2 commits
+
+  param ($count)
+  grh $count --keep
+}
+
+function grhs {
+  # "git reset head --soft":
+  # The `--soft` flag will keep any uncommitted changes, and keep them staged.
+  # => This resets the latest commit (= HEAD = HEAD~0) of the branch,
+  # by default to the previous commit (= HEAD~ = HEAD~1).
+  # Provide a number argument to reset to a commit further back.
+  # Usage: grhs [<number of commits before HEAD>]
+  #   E.g. grhs = grhs 1 => Reset HEAD to previous commit
+  #               grhs 2 => Reset HEAD 2 commits
+
+  param ($count)
+  grh $count --soft
+}
+
+function grk {
+  # `--keep` flag = Safer version of `--hard`:
+  # reset will be aborted if there are any dirty files
+
+  git reset --keep @args
+}
+
+function grs {
+  # `--soft` flag: Keep changes, and keep them staged
+
+  git reset --soft @args
 }
 
 function grb {
   git rebase @args
 }
 
-function grh {
-  git reset --hard @args
+function grbm {
+  git rebase $(git_main_branch)
 }
 
-function grhd {
-  # git reset head:
-  # Resets the latest commit (= HEAD = HEAD~0) of the repo,
-  # by default to the previous commit (= HEAD~ = HEAD~1).
-  # `git reset` defaults to the `--mixed` flag, which means
-  # it will keep the changes, but unstage them.
-  # Provide a number argument to reset to a commit further back.
-  # Usage: grhd 5
+function gre {
+  # Restore previous state of files:
+  # - git restore path/to/file = restore to last committed version
+  # - git restore --source=HEAD~2 path/to/file = restore from specific commit
+  # - git restore . = throw away all uncommitted changes
+  #                   (restore all files to last committed versions)
 
-  param ($num)
-  git reset HEAD~$num
+  git restore @args
 }
 
-function grhdh {
-  # git reset head hard:
-  # Resets the latest commit (= HEAD = HEAD~0) of the repo,
-  # by default to the previous commit (= HEAD~ = HEAD~1).
-  # The `--hard` flag will remove all changes, including anything
-  # uncommitted! (Beware; there is no way to recover uncommitted changes!)
-  # Provide a number argument to reset to a commit further back.
-  # Usage: grhdh 5
+function grea {
+  # git restore "all":
+  # Throw away all uncommitted changes
+  # (Restore all files to last committed versions)
 
-  param ($num)
-  git reset HEAD~$num --hard
+  git restore .
+}
+
+function greh {
+  # "git restore from HEAD":
+  # Restore a file from x commits before HEAD.
+  # -> Defaults to 1 commit before HEAD if no second arg given.
+  # Usage: greh path/to/file [<number of commits before HEAD>]
+  # - greh git.plugin.ps1: Restore git.plugin.ps1 to the version
+  #                        of the previous commit
+  # - greh git.plugin.ps1 2: Restore git.plugin.ps1 to the version
+  #                          of 2 commits back
+
+  param (
+    [string]$path,
+    [int]$count = 1
+  )
+  git restore --source=HEAD~$count $path
 }
 
 function grem {
@@ -587,31 +686,38 @@ function gremrmo {
   git remote rm origin
 }
 
-function gremsu {
-  # Update a remote's URL.
-  # Usage: gremsu origin https://github.com/...
+function gremset {
+  # Set a remote's URL.
+  # Usage: gremset origin https://github.com/...
 
   git remote set-url @args
 }
 
-function gremsuo {
-  # Update the 'origin' remote's URL.
-  # Usage: gremsuo https://github.com/...
+function gremseto {
+  # Set the 'origin' remote's URL.
+  # Usage: gremseto https://github.com/...
 
   git remote set-url origin @args
 }
 
-function grm {
-  git rm @args
+function gremsh {
+  git remote show @args
 }
 
-function grst {
-  # Restore previous state of files:
-  # - git restore path/to/file = restore to last committed version
-  # - git restore . = throw away all uncommitted changes
-  #                   (restore all files to last committed versions)
+function gremv {
+  # List all remotes:
 
-  git restore @args
+  git remote -v
+}
+
+function grl {
+  # git reflog: Useful to restore lost commits after reset
+
+  git reflog @args
+}
+
+function grm {
+  git rm @args
 }
 
 function gs {
