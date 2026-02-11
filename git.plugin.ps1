@@ -349,7 +349,7 @@ function gig {
   git update-index --skip-worktree @args
 }
 
-function gunig {
+function gug {
   # Unignore ignored files:
 
   git update-index --no-skip-worktree @args
@@ -724,15 +724,15 @@ function gs {
   git status @args
 }
 
-function gss {
-  git status --short
-}
-
 function gsh {
   # By default this shows the diff between the last 2 commits;
   # AKA what was added in the last commit:
 
   git --no-pager show @args
+}
+
+function gss {
+  git status --short
 }
 
 function gst {

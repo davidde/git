@@ -107,7 +107,7 @@ alias ggo='git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=fo
 # Ignore already tracked files:
 alias gig='git update-index --skip-worktree'
 # Unignore ignored files:
-alias gunig='git update-index --no-skip-worktree'
+alias gug='git update-index --no-skip-worktree'
 # List ignored files:
 alias glsig='git ls-files -v | grep ^S'
 
@@ -231,7 +231,7 @@ alias grm='git rm'
 # but since my usage of ghostscript is rare compared to git,
 # I can live with typing 'ghostscript' in full when necessary.
 alias gs='git status'
-alias gsh='git show --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%+b%n"'
+alias gsh='git --no-pager show'
 # Show a specified file from stash x (defaults to lastest stash):
 # Usage: gshsf <file> [<stash number>]
 alias gshsf='git_show_stash_file'
