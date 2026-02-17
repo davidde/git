@@ -388,16 +388,16 @@ function glog {
   Write-Output ""
 }
 
-function glsf {
-  # git list files:
-
-  git ls-files
-}
-
 function glsb {
   # git list branches:
 
   git branch --all
+}
+
+function glsf {
+  # git list tracked files:
+
+  git ls-files
 }
 
 function glsr {
@@ -410,6 +410,18 @@ function glss {
   # git list submodules:
 
   git config --file .gitmodules --name-only --get-regexp path
+}
+
+function glsst {
+  # git list stashes:
+
+  git --no-pager stash list @args
+}
+
+function glst {
+  # git list tags:
+
+  git --no-pager tag --list @args
 }
 
 # Remove the builtin powershell `gm`:
@@ -750,7 +762,7 @@ function gstd {
 }
 
 function gstls {
-  git --no-pager stash list
+  git --no-pager stash list @args
 }
 
 function gstph {
@@ -773,4 +785,65 @@ function gstshp {
   # = git diff stash@{0}^! = git diff stash@{0}^ stash@{0}
 
   git stash show -p
+}
+
+function gsub {
+  git submodule @args
+}
+
+function gsuba {
+  git submodule add @args
+}
+
+function gsubi {
+  # Initialize submodules:
+
+  git submodule update --init @args
+}
+
+function gsubf {
+  git submodule foreach @args
+}
+
+function gsubfpl {
+  git submodule foreach git pull
+}
+
+function gsubfplom {
+  git submodule foreach git pull origin $(git_main_branch)
+}
+
+function gsubs {
+  git submodule status @args
+}
+
+function gsubu {
+  # Update submodules:
+
+  git submodule update --remote --merge @args
+}
+
+function gt {
+  git tag @args
+}
+
+function gtam {
+  # Takes message before annotated tag name!
+  # E.g.: gtam 'Release v1.0.0' v1.0.0
+
+  git tag -am @args
+}
+
+function gtd {
+  git tag --delete @args
+}
+
+function gtls {
+  git --no-pager tag --list @args
+}
+
+function gtsm {
+  # GPG sign an annotated tag:
+
+  git tag -sm @args
 }

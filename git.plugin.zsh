@@ -124,13 +124,18 @@ alias gloc='git_locate_string'
 # Regular 'git log' in style:
 alias glog='git --no-pager log --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n"' # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
 
-alias glsf='git ls-files'
 # git list branches:
 alias glsb='git branch --all'
+# git list tracked files:
+alias glsf='git ls-files'
 # git list remotes:
 alias glsr='git remote -v'
 # git list submodules:
 alias glss='git config --file .gitmodules --name-only --get-regexp path'
+# git list stashes:
+alias glsst='git --no-pager stash list'
+# git list tags:
+alias glst='git --no-pager tag --list'
 
 alias gm='git merge'
 # Try to merge origin/main into the currently active branch:
@@ -239,28 +244,28 @@ alias gss='git_status_short' # Usage: gss [<number of commits>]
 alias gst='git stash'
 alias gsta='git stash apply'
 alias gstd='git stash drop'
-alias gstl='git stash list'
-alias gstls='git stash list | cat'
-alias gstp='git stash push'
-alias gstpop='git stash pop'
+alias gstls='git --no-pager stash list'
+alias gstph='git stash push'
+alias gstpp='git stash pop'
 # Show the diff between latest stash and local working tree:
-alias gstsl='git stash show -l' # = git diff stash@{0}
+alias gstshl='git stash show -l' # = git diff stash@{0}
 # Show the diff between latest stash and its original parent commit:
-alias gstsp='git stash show -p' # = git diff stash@{0}^! = git diff stash@{0}^ stash@{0}
+alias gstshp='git stash show -p' # = git diff stash@{0}^! = git diff stash@{0}^ stash@{0}
+
 alias gsub='git submodule'
 alias gsuba='git submodule add'
 alias gsubi='git submodule update --init' # Initialize submodules
-alias gsubpl='git submodule foreach git pull'
-alias gsubplom='git submodule foreach git pull origin $(git_main_branch)'
+alias gsubf='git submodule foreach'
+alias gsubfpl='git submodule foreach git pull'
+alias gsubfplom='git submodule foreach git pull origin $(git_main_branch)'
 alias gsubs='git submodule status'
 alias gsubu='git submodule update --remote --merge' # Update submodules
 
 alias gt='git tag'
 alias gtam='git tag -am' # <- takes message before annotated tag name: e.g. gtam 'Release v1.0.0' v1.0.0
-alias gtsm='git tag -sm' # GPG sign an annotated tag
 alias gtd='git tag --delete'
-alias gtl='git tag --list'
-alias gtls='git tag --list | cat'
+alias gtls='git --no-pager tag --list'
+alias gtsm='git tag -sm' # GPG sign an annotated tag
 
 
 # Functions
