@@ -82,27 +82,27 @@ alias gcpc='git cherry-pick --continue'
 alias gcpq='git cherry-pick --quit'
 alias gcps='git cherry-pick --skip'
 
-alias gd='git --no-pager diff'
-alias gds='git --no-pager diff --staged'
+alias gd='git diff'
+alias gds='git diff --staged'
 # Show the diff between latest stash and local working tree:
 # = git stash show -l:
-alias gdst='git --no-pager diff stash@{0}'
+alias gdst='git diff stash@{0}'
 # Show the diff between latest stash and HEAD:
-alias gdsth='git --no-pager diff stash@{0} HEAD'
+alias gdsth='git diff stash@{0} HEAD'
 # Show the diff between latest stash and its original parent commit:
 # = git stash show -p:
-alias gdstp='git --no-pager diff stash@{0}^ stash@{0}'
+alias gdstp='git diff stash@{0}^ stash@{0}'
 
 alias gf='git fetch'
 alias gfo='git fetch origin'
 
 # git graph (all commits):
-alias gg='git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n"'
+alias gg='git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n"'
 # git graph branches:
 alias ggb='gg --simplify-by-decoration'
 alias ggbo='ggo --simplify-by-decoration'
 # git graph --oneline (all commits):
-alias ggo='git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n"'
+alias ggo='git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n"'
 
 # Ignore already tracked files:
 alias gig='git update-index --skip-worktree'
@@ -117,12 +117,12 @@ alias gl='glog -10'
 # Usage: glf <file> [<from line>] [<to line>]
 alias glf='git_log_file'
 # "git log --oneline":
-alias glo='git --no-pager log --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset"'
+alias glo='git log --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset"'
 # Locate all commits in which a specific line of code (string) was first introduced:
 # Usage: gloc <Line-of-Code> [<file>]
 alias gloc='git_locate_string'
 # Regular 'git log' in style:
-alias glog='git --no-pager log --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n"' # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
+alias glog='git log --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n"' # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
 
 # git list branches:
 alias glsb='git branch --all'
@@ -133,9 +133,9 @@ alias glsr='git remote -v'
 # git list submodules:
 alias glss='git config --file .gitmodules --name-only --get-regexp path'
 # git list stashes:
-alias glsst='git --no-pager stash list'
+alias glsst='git stash list'
 # git list tags:
-alias glst='git --no-pager tag --list'
+alias glst='git tag --list'
 
 alias gm='git merge'
 # Try to merge origin/main into the currently active branch:
@@ -236,7 +236,7 @@ alias grm='git rm'
 # but since my usage of ghostscript is rare compared to git,
 # I can live with typing 'ghostscript' in full when necessary.
 alias gs='git status'
-alias gsh='git --no-pager show'
+alias gsh='git show'
 # Show a specified file from stash x (defaults to lastest stash):
 # Usage: gshsf <file> [<stash number>]
 alias gshsf='git_show_stash_file'
@@ -245,7 +245,7 @@ alias gst='git stash'
 alias gsta='git stash apply'
 alias gstd='git stash drop'
 alias gstl='git stash list'
-alias gstls='git --no-pager stash list'
+alias gstls='git stash list'
 alias gstph='git stash push'
 alias gstpp='git stash pop'
 # Show the diff between latest stash and local working tree:
@@ -266,7 +266,7 @@ alias gt='git tag'
 alias gtam='git tag -am' # <- takes message before annotated tag name: e.g. gtam 'Release v1.0.0' v1.0.0
 alias gtd='git tag --delete'
 alias gtl='git tag --list'
-alias gtls='git --no-pager tag --list'
+alias gtls='git tag --list'
 alias gtsm='git tag -sm' # GPG sign an annotated tag
 
 

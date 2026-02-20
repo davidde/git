@@ -205,12 +205,12 @@ function gcoc() {
   #   E.g. gcoc = gcoc 1   => checks out direct child
   #               gcoc 2   => checks out grandchild
 
-  $children = $(git --no-pager log --all --ancestry-path ^HEAD --format=format:%H)
+  $children = $(git log --all --ancestry-path ^HEAD --format=format:%H)
   Write-Host ""
 
   if (-not $children) {
     Write-Host "This commit does not have any children, HEAD remains at:`n     "  -NoNewline
-    git --no-pager log -1 --oneline
+    git log -1 --oneline
     Write-Host ""
     return
   } else {
@@ -284,31 +284,31 @@ function gcps() {
 }
 
 function gd {
-  git --no-pager diff @args
+  git diff @args
 }
 
 function gds {
-  git --no-pager diff --staged @args
+  git diff --staged @args
 }
 
 function gdst {
   # Show the diff between latest stash and local working tree:
   # = git stash show -l:
 
-  git --no-pager diff 'stash@{0}' @args
+  git diff 'stash@{0}' @args
 }
 
 function gdsth {
   # Show the diff between latest stash and HEAD:
 
-  git --no-pager diff 'stash@{0}' HEAD
+  git diff 'stash@{0}' HEAD
 }
 
 function gdstp {
   # Show the diff between latest stash and its original parent commit:
   # = git stash show -p
 
-  git --no-pager diff 'stash@{0}^' 'stash@{0}'
+  git diff 'stash@{0}^' 'stash@{0}'
 }
 
 function gf {
@@ -322,7 +322,7 @@ function gfo {
 function gg {
   # git graph (all commits):
 
-  git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n" @args
+  git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n" @args
 }
 
 function ggb {
@@ -340,7 +340,7 @@ function ggbo {
 function ggo {
   # git graph --oneline (all commits):
 
-  git --no-pager log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n" @args
+  git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n" @args
 }
 
 function gig {
@@ -374,7 +374,7 @@ function gl {
 function glo {
   # "git log --oneline":
 
-  git --no-pager log --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset"
+  git log --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset"
 }
 
 function glog {
@@ -383,7 +383,7 @@ function glog {
 
   param ($count)
   Write-Output ""
-  git --no-pager log $count --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" @args
+  git log $count --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" @args
   # %w(0,4,4): no line-wrap, indent first line 4 chars, subsequent lines also 4 lines
   Write-Output ""
 }
@@ -415,13 +415,13 @@ function glss {
 function glsst {
   # git list stashes:
 
-  git --no-pager stash list @args
+  git stash list @args
 }
 
 function glst {
   # git list tags:
 
-  git --no-pager tag --list @args
+  git tag --list @args
 }
 
 # Remove the builtin powershell `gm`:
@@ -740,7 +740,7 @@ function gsh {
   # By default this shows the diff between the last 2 commits;
   # AKA what was added in the last commit:
 
-  git --no-pager show @args
+  git show @args
 }
 
 function gss {
@@ -766,7 +766,7 @@ function gstl {
 }
 
 function gstls {
-  git --no-pager stash list @args
+  git stash list @args
 }
 
 function gstph {
@@ -847,7 +847,7 @@ function gtl {
 }
 
 function gtls {
-  git --no-pager tag --list @args
+  git tag --list @args
 }
 
 function gtsm {
