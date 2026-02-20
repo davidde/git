@@ -244,7 +244,6 @@ alias gss='git_status_short' # Usage: gss [<number of commits>]
 alias gst='git stash'
 alias gsta='git stash apply'
 alias gstd='git stash drop'
-alias gstl='git stash list'
 alias gstls='git stash list'
 alias gstph='git stash push'
 alias gstpp='git stash pop'
@@ -265,7 +264,6 @@ alias gsubu='git submodule update --remote --merge' # Update submodules
 alias gt='git tag'
 alias gtam='git tag -am' # <- takes message before annotated tag name: e.g. gtam 'Release v1.0.0' v1.0.0
 alias gtd='git tag --delete'
-alias gtl='git tag --list'
 alias gtls='git tag --list'
 alias gtsm='git tag -sm' # GPG sign an annotated tag
 

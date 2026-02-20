@@ -761,10 +761,6 @@ function gstd {
   git stash drop @args
 }
 
-function gstl {
-  git stash list @args
-}
-
 function gstls {
   git stash list @args
 }
@@ -840,10 +836,6 @@ function gtam {
 
 function gtd {
   git tag --delete @args
-}
-
-function gtl {
-  git tag --list @args
 }
 
 function gtls {
