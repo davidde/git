@@ -2,11 +2,11 @@
 #         Git shortcuts           #
 ###################################
 
-def g [...args: string] {
+def --wrapped g [...args: string] {
     git ...$args
 }
 
-def ga [...args: string] {
+def --wrapped ga [...args: string] {
     git add ...$args
 }
 
@@ -14,7 +14,7 @@ def gaa [] {
     git add --all
 }
 
-def gai [...args: string] {
+def --wrapped gai [...args: string] {
     git add --interactive ...$args
 }
 
@@ -38,11 +38,11 @@ def gana [] {
     git commit --amend --no-edit -a
 }
 
-def gap [...args: string] {
+def --wrapped gap [...args: string] {
     git add --patch ...$args
 }
 
-def gb [...args: string] {
+def --wrapped gb [...args: string] {
     git branch ...$args
 }
 
@@ -51,15 +51,15 @@ def gba [] {
     git branch --all
 }
 
-def gbd [...args: string] {
+def --wrapped gbd [...args: string] {
     git branch --delete ...$args
 }
 
-def gbdf [...args: string] {
+def --wrapped gbdf [...args: string] {
     git branch --delete --force ...$args
 }
 
-def gbl [...args: string] {
+def --wrapped gbl [...args: string] {
     git blame ...$args
 }
 
@@ -68,15 +68,15 @@ def gbls [] {
     git branch --all
 }
 
-def gbs [...args: string] {
+def --wrapped gbs [...args: string] {
     git bisect ...$args
 }
 
-def gbsb [...args: string] {
+def --wrapped gbsb [...args: string] {
     git bisect bad ...$args
 }
 
-def gbsg [...args: string] {
+def --wrapped gbsg [...args: string] {
     git bisect good ...$args
 }
 
@@ -88,11 +88,11 @@ def gbss [] {
     git bisect start
 }
 
-def gc [...args: string] {
+def --wrapped gc [...args: string] {
     git commit --verbose ...$args
 }
 
-def gcam [...args: string] {
+def --wrapped gcam [...args: string] {
     git commit -am ...$args
 }
 
@@ -100,11 +100,11 @@ def gcame [] {
     git commit --allow-empty-message -am ""
 }
 
-def gcamg [...args: string] {
+def --wrapped gcamg [...args: string] {
     git commit --gpg-sign -am ...$args
 }
 
-def gcams [...args: string] {
+def --wrapped gcams [...args: string] {
     git commit --signoff -am ...$args
 }
 
@@ -112,24 +112,24 @@ def gcamu [] {
     git commit -am "Update"
 }
 
-def gcem [...args: string] {
+def --wrapped gcem [...args: string] {
     # Create empty commit for testing CI/CD
     git commit --allow-empty -m ...$args
 }
 
-def gcf [...args: string] {
+def --wrapped gcf [...args: string] {
     git config ...$args
 }
 
-def gcfg [...args: string] {
+def --wrapped gcfg [...args: string] {
     git config --global ...$args
 }
 
-def gcfl [...args: string] {
+def --wrapped gcfl [...args: string] {
     git config --local ...$args
 }
 
-def gcfls [...args: string] {
+def --wrapped gcfls [...args: string] {
     git config --list ...$args
 }
 
@@ -144,15 +144,15 @@ def gcl [url, path?] {
     }
 }
 
-def gcm [...args: string] {
+def --wrapped gcm [...args: string] {
     git commit -m ...$args
 }
 
-def gcmg [...args: string] {
+def --wrapped gcmg [...args: string] {
     git commit --gpg-sign -m ...$args
 }
 
-def gcms [...args: string] {
+def --wrapped gcms [...args: string] {
     git commit --signoff -m ...$args
 }
 
@@ -163,11 +163,11 @@ def gcnt [] {
     echo "    (git rev-list --count HEAD) commits total up to current HEAD"
 }
 
-def gco [...args: string] {
+def --wrapped gco [...args: string] {
     git checkout ...$args
 }
 
-def gcob [...args: string] {
+def --wrapped gcob [...args: string] {
     git checkout -b ...$args
 }
 
@@ -201,7 +201,7 @@ def gcod [] {
     git checkout develop
 }
 
-def gcof [...args: string] {
+def --wrapped gcof [...args: string] {
     git checkout -f ...$args
 }
 
@@ -215,7 +215,7 @@ def gcop [count = 1] {
     git checkout $"HEAD~($count)"
 }
 
-def gcp [...args: string] {
+def --wrapped gcp [...args: string] {
     git cherry-pick ...$args
 }
 
@@ -235,15 +235,15 @@ def gcps [] {
     git cherry-pick --skip
 }
 
-def gd [...args: string] {
+def --wrapped gd [...args: string] {
     git diff ...$args
 }
 
-def gds [...args: string] {
+def --wrapped gds [...args: string] {
     git diff --staged ...$args
 }
 
-def gdst [...args: string] {
+def --wrapped gdst [...args: string] {
     # Show diff between latest stash and working tree
     git diff 'stash@{0}' ...$args
 }
@@ -258,40 +258,40 @@ def gdstp [] {
     git diff 'stash@{0}^' 'stash@{0}'
 }
 
-def gf [...args: string] {
+def --wrapped gf [...args: string] {
     git fetch ...$args
 }
 
-def gfo [...args: string] {
+def --wrapped gfo [...args: string] {
     git fetch origin ...$args
 }
 
-def gg [...args: string] {
+def --wrapped gg [...args: string] {
     # Git graph (all commits)
     git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset%x09%C(dim white)%an%Creset%x09%C(bold green)%D%Creset%n%C(white)%ad%Creset%x09%C(bold)%s%Creset%n" ...$args
 }
 
-def ggb [...args: string] {
+def --wrapped ggb [...args: string] {
     # Git graph branches
     gg "--simplify-by-decoration" ...$args
 }
 
-def ggbo [...args: string] {
+def --wrapped ggbo [...args: string] {
     # Git graph branches --oneline
     ggo "--simplify-by-decoration" ...$args
 }
 
-def ggo [...args: string] {
+def --wrapped ggo [...args: string] {
     # Git graph --oneline (all commits)
     git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n" ...$args
 }
 
-def gig [...args: string] {
+def --wrapped gig [...args: string] {
     # Ignore tracked files
     git update-index --skip-worktree ...$args
 }
 
-def gug [...args: string] {
+def --wrapped gug [...args: string] {
     # Unignore files
     git update-index --no-skip-worktree ...$args
 }
@@ -311,7 +311,7 @@ def glo [] {
     git log --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset"
 }
 
-def glog [count?: int, ...args: string] {
+def --wrapped glog [count?: int, ...args: string] {
     # Git log with formatting; defaults to full log, pass count for N commits
     echo ""
     if ($count != null) {
@@ -342,21 +342,21 @@ def glss [] {
     git config --file .gitmodules --name-only --get-regexp path
 }
 
-def glsst [...args: string] {
+def --wrapped glsst [...args: string] {
     # List stashes
     git stash list ...$args
 }
 
-def glst [...args: string] {
+def --wrapped glst [...args: string] {
     # List tags
     git tag --list ...$args
 }
 
-def gm [...args: string] {
+def --wrapped gm [...args: string] {
     git merge ...$args
 }
 
-def gmnff [...args: string] {
+def --wrapped gmnff [...args: string] {
     git merge --no-ff ...$args
 }
 
@@ -364,7 +364,7 @@ def gmom [] {
     git merge $"origin/(git_main_branch)"
 }
 
-def gmsq [...args: string] {
+def --wrapped gmsq [...args: string] {
     git merge --squash ...$args
 }
 
@@ -372,29 +372,29 @@ def gmum [] {
     git merge $"upstream/(git_main_branch)"
 }
 
-def gmv [...args: string] {
+def --wrapped gmv [...args: string] {
     git mv ...$args
 }
 
-def gph [...args: string] {
+def --wrapped gph [...args: string] {
     git push ...$args
 }
 
-def gphd [...args: string] {
+def --wrapped gphd [...args: string] {
     # Delete remote branch
     git push --delete ...$args
 }
 
-def gphdo [...args: string] {
+def --wrapped gphdo [...args: string] {
     # Delete branch from origin
     git push --delete origin ...$args
 }
 
-def gphf [...args: string] {
+def --wrapped gphf [...args: string] {
     git push --force-with-lease ...$args
 }
 
-def gphff [...args: string] {
+def --wrapped gphff [...args: string] {
     git push --force ...$args
 }
 
@@ -405,12 +405,12 @@ def gpht [] {
     }
 }
 
-def gphu [...args: string] {
+def --wrapped gphu [...args: string] {
     # Set upstream branch
     git push -u ...$args
 }
 
-def gphuo [...args: string] {
+def --wrapped gphuo [...args: string] {
     # Set origin as upstream
     git push -u origin ...$args
 }
@@ -420,34 +420,34 @@ def gphuom [] {
     git push -u origin main
 }
 
-def gpl [...args: string] {
+def --wrapped gpl [...args: string] {
     git pull ...$args
 }
 
-def gpla [...args: string] {
+def --wrapped gpla [...args: string] {
     # Pull with autostash
     git pull --autostash ...$args
 }
 
-def gplr [...args: string] {
+def --wrapped gplr [...args: string] {
     git pull --rebase ...$args
 }
 
-def gplrs [...args: string] {
+def --wrapped gplrs [...args: string] {
     git pull --recurse-submodules ...$args
 }
 
-def gr [...args: string] {
+def --wrapped gr [...args: string] {
     git reset ...$args
 }
 
-def grh [count, ...args: string] {
+def --wrapped grh [count, ...args: string] {
     # git reset HEAD
     # Usage: grh 1 => reset HEAD to previous commit; grh 2 => 2 commits back
     git reset $"HEAD~($count)" ...$args
 }
 
-def grhard [...args: string] {
+def --wrapped grhard [...args: string] {
     # Hard reset (dangerous: removes uncommitted changes)
     git reset --hard ...$args
 }
@@ -467,17 +467,17 @@ def grhs [count = 1] {
     grh $count "--soft"
 }
 
-def grk [...args: string] {
+def --wrapped grk [...args: string] {
     # Keep reset (safer than --hard; aborted if dirty files)
     git reset --keep ...$args
 }
 
-def grs [...args: string] {
+def --wrapped grs [...args: string] {
     # Soft reset
     git reset --soft ...$args
 }
 
-def grb [...args: string] {
+def --wrapped grb [...args: string] {
     git rebase ...$args
 }
 
@@ -485,7 +485,7 @@ def grbm [] {
     git rebase (git_main_branch)
 }
 
-def gre [...args: string] {
+def --wrapped gre [...args: string] {
     git restore ...$args
 }
 
@@ -499,16 +499,16 @@ def greh [path, count = 1] {
     git restore $"--source=HEAD~($count)" $path
 }
 
-def grem [...args: string] {
+def --wrapped grem [...args: string] {
     git remote ...$args
 }
 
-def grema [...args: string] {
+def --wrapped grema [...args: string] {
     # Add remote
     git remote add ...$args
 }
 
-def gremao [...args: string] {
+def --wrapped gremao [...args: string] {
     # Add origin remote
     git remote add origin ...$args
 }
@@ -518,7 +518,7 @@ def gremls [] {
     git remote -v
 }
 
-def gremrm [...args: string] {
+def --wrapped gremrm [...args: string] {
     # Remove remote
     git remote rm ...$args
 }
@@ -528,17 +528,17 @@ def gremrmo [] {
     git remote rm origin
 }
 
-def gremset [...args: string] {
+def --wrapped gremset [...args: string] {
     # Set remote URL
     git remote set-url ...$args
 }
 
-def gremseto [...args: string] {
+def --wrapped gremseto [...args: string] {
     # Set origin URL
     git remote set-url origin ...$args
 }
 
-def gremsh [...args: string] {
+def --wrapped gremsh [...args: string] {
     git remote show ...$args
 }
 
@@ -547,19 +547,19 @@ def gremv [] {
     git remote -v
 }
 
-def grl [...args: string] {
+def --wrapped grl [...args: string] {
     git reflog ...$args
 }
 
-def grm [...args: string] {
+def --wrapped grm [...args: string] {
     git rm ...$args
 }
 
-def gs [...args: string] {
+def --wrapped gs [...args: string] {
     git status ...$args
 }
 
-def gsh [...args: string] {
+def --wrapped gsh [...args: string] {
     git show ...$args
 }
 
@@ -567,27 +567,27 @@ def gss [] {
     git status --short
 }
 
-def gst [...args: string] {
+def --wrapped gst [...args: string] {
     git stash ...$args
 }
 
-def gsta [...args: string] {
+def --wrapped gsta [...args: string] {
     git stash apply ...$args
 }
 
-def gstd [...args: string] {
+def --wrapped gstd [...args: string] {
     git stash drop ...$args
 }
 
-def gstls [...args: string] {
+def --wrapped gstls [...args: string] {
     git stash list ...$args
 }
 
-def gstph [...args: string] {
+def --wrapped gstph [...args: string] {
     git stash push ...$args
 }
 
-def gstpp [...args: string] {
+def --wrapped gstpp [...args: string] {
     git stash pop ...$args
 }
 
@@ -601,20 +601,20 @@ def gstshp [] {
     git stash show -p
 }
 
-def gsub [...args: string] {
+def --wrapped gsub [...args: string] {
     git submodule ...$args
 }
 
-def gsuba [...args: string] {
+def --wrapped gsuba [...args: string] {
     git submodule add ...$args
 }
 
-def gsubi [...args: string] {
+def --wrapped gsubi [...args: string] {
     # Initialize submodules
     git submodule update --init ...$args
 }
 
-def gsubf [...args: string] {
+def --wrapped gsubf [...args: string] {
     git submodule foreach ...$args
 }
 
@@ -626,33 +626,33 @@ def gsubfplom [] {
     git submodule foreach git pull origin (git_main_branch)
 }
 
-def gsubs [...args: string] {
+def --wrapped gsubs [...args: string] {
     git submodule status ...$args
 }
 
-def gsubu [...args: string] {
+def --wrapped gsubu [...args: string] {
     # Update submodules
     git submodule update --remote --merge ...$args
 }
 
-def gt [...args: string] {
+def --wrapped gt [...args: string] {
     git tag ...$args
 }
 
-def gtam [...args: string] {
+def --wrapped gtam [...args: string] {
     # Annotated tag with message
     git tag -am ...$args
 }
 
-def gtd [...args: string] {
+def --wrapped gtd [...args: string] {
     git tag --delete ...$args
 }
 
-def gtls [...args: string] {
+def --wrapped gtls [...args: string] {
     git tag --list ...$args
 }
 
-def gtsm [...args: string] {
+def --wrapped gtsm [...args: string] {
     # GPG signed tag
     git tag -sm ...$args
 }
