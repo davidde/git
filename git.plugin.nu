@@ -364,6 +364,10 @@ def gmom [] {
     git merge $"origin/(git_main_branch)"
 }
 
+def gmsq [...args: string] {
+    git merge --squash ...$args
+}
+
 def gmum [] {
     git merge $"upstream/(git_main_branch)"
 }

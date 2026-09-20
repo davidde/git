@@ -141,6 +141,7 @@ alias gm='git merge'
 alias gmnff='git merge --no-ff'
 # Try to merge origin/main into the currently active branch:
 alias gmom='git merge origin/$(git_main_branch)'
+alias gmsq='git merge --squash'
 # Try to merge upstream/main into the currently active branch:
 alias gmum='git merge upstream/$(git_main_branch)'
 alias gmv='git mv'

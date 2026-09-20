@@ -441,6 +441,10 @@ function gmom {
   git merge "origin/$(git_main_branch)"
 }
 
+function gmsq {
+  git merge --squash @args
+}
+
 # Try to merge upstream/main into the currently active branch:
 function gmum {
   git merge "upstream/$(git_main_branch)"
