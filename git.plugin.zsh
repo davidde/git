@@ -268,7 +268,7 @@ alias gtam='git tag -am' # <- takes message before annotated tag name: e.g. gtam
 alias gtd='git tag --delete'
 alias gtls='git tag --list'
 alias gtsm='git tag -sm' # GPG sign an annotated tag
-
+alias gwta='git worktree add'
 
 # Functions
 ################

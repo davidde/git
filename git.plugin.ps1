@@ -855,3 +855,9 @@ function gtsm {
 
   git tag -sm @args
 }
+
+function gwta {
+  # git worktree add ../my-repo-task2 -b feat/task2
+
+  git worktree add @args
+}

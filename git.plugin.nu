@@ -657,6 +657,10 @@ def --wrapped gtsm [...args: string] {
   git tag -sm ...$args
 }
 
+def --wrapped gwta [...args: string] {
+  # git worktree add ../my-repo-task2 -b feat/task2
+  git worktree add ...$args
+}
 
 ########################################
 #         Git Utility Functions        #
