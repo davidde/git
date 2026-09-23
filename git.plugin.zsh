@@ -104,6 +104,9 @@ alias ggbo='ggo --simplify-by-decoration'
 # git graph --oneline (all commits):
 alias ggo='git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n"'
 
+alias gi='git init'
+alias gib='git init --bare'
+
 # Ignore already tracked files:
 alias gig='git update-index --skip-worktree'
 # Unignore ignored files:

@@ -286,6 +286,14 @@ def --wrapped ggo [...args: string] {
   git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n" ...$args
 }
 
+def --wrapped gi [...args: string] {
+  git init ...$args
+}
+
+def --wrapped gib [...args: string] {
+  git init --bare ...$args
+}
+
 def --wrapped gig [...args: string] {
   # Ignore tracked files
   git update-index --skip-worktree ...$args

@@ -343,6 +343,14 @@ function ggo {
   git log --graph --all --date=format:"%d/%m/%Y" --format=format:"%C(yellow)%h%Creset   %C(white)%ad%Creset   %C(bold)%s   %C(bold green)%D%Creset%n" @args
 }
 
+function gi {
+  git init @args
+}
+
+function gib {
+  git init --bare @args
+}
+
 function gig {
   # Ignore already tracked files:
 
