@@ -461,17 +461,17 @@ def --wrapped grhard [...args: string] {
 }
 
 def grhhard [count = 1] {
-  # Hard reset HEAD
+  # UNSAFE: there is no way to recover uncommitted changes!
   grh $count "--hard"
 }
 
 def grhk [count = 1] {
-  # Keep reset HEAD (aborts if dirty files)
+  # Safer version: reset will be aborted if there are any dirty files
   grh $count "--keep"
 }
 
 def grhs [count = 1] {
-  # Soft reset HEAD
+  # Changes will be kept and remain staged:
   grh $count "--soft"
 }
 
