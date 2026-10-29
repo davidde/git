@@ -133,15 +133,16 @@ def --wrapped gcfls [...args: string] {
   git config --list ...$args
 }
 
-def gcl [url, path?] {
-  # Git clone and cd into project
-  if ($path != null) {
-    git clone --recurse-submodules $url $path
-    cd $path
+def --env gcl [url: string, path?: string] {
+  # Git clone and cd into project:
+  let target = if ($path | is-not-empty) {
+    $path
   } else {
-    git clone --recurse-submodules $url
-    cd ($url | path parse | get stem)
+    $url | path parse | get stem
   }
+
+  git clone --recurse-submodules $url $target
+  cd $target
 }
 
 def --wrapped gcm [...args: string] {
@@ -159,8 +160,8 @@ def --wrapped gcms [...args: string] {
 def gcnt [] {
   # Count commits on current branch
   git shortlog -sn
-  echo "  + ___________________________________"
-  echo "    (git rev-list --count HEAD) commits total up to current HEAD"
+  print "  + ___________________________________"
+  print $"    (git rev-list --count HEAD) commits total up to current HEAD"
 }
 
 def --wrapped gco [...args: string] {
@@ -181,7 +182,7 @@ def gcoc [count = 1] {
   # Usage: gcoc = gcoc 1 => direct child; gcoc 2 => grandchild
   let children = (git log --all --ancestry-path ^HEAD --format=format:%H | lines)
   if ($children | is-empty) {
-    echo "This commit does not have any children, HEAD remains at:"
+    print "This commit does not have any children, HEAD remains at:"
     git log -1 --oneline
     return
   }
@@ -321,13 +322,13 @@ def glo [] {
 
 def --wrapped glog [count?: int, ...args: string] {
   # Git log with formatting; defaults to full log, pass count for N commits
-  echo ""
+  print ""
   if ($count != null) {
     git log $"-($count)" --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" ...$args
   } else {
     git log --reverse --name-status --date=format:"%A %B %d %Y at %H:%M" --format=format:"%C(yellow)%H%Creset%x09%C(bold green)%D%Creset%n%<|(40)%C(white)%ad%x09%an%Creset%n%n    %C(bold)%s%Creset%n%w(0,4,4)%n%-b%n" ...$args
   }
-  echo ""
+  print ""
 }
 
 def glsb [] {
