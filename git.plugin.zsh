@@ -49,6 +49,7 @@ alias gcamu='git commit -am "Update"'
 # E.g. git commit --allow-empty -m "Triggering build"
 alias gcem='git commit --allow-empty -m'
 alias gcf='git config'
+alias gcfaa='git config agent.autocommit'
 alias gcfg='git config --global'
 alias gcfl='git config --local'
 alias gcfls='git config --list'

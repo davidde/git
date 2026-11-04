@@ -121,6 +121,18 @@ def --wrapped gcf [...args: string] {
   git config ...$args
 }
 
+def gcfaa [status?: string] {
+  # Pass 'true', 'yes', 'y', 'on' or 1 to activate autocommits for AI agents,
+  # 'false', 'no', 'n', 'off' or 0 to turn it off again.
+  # (No args will just show the current value, or nothing if unset)
+  if ($status | is-empty) {
+    git config agent.autocommit
+  } else {
+    let status = $status | match $in { "y" => "yes", "n" => "no", $x => $x }
+    git config agent.autocommit $status
+  }
+}
+
 def --wrapped gcfg [...args: string] {
   git config --global ...$args
 }

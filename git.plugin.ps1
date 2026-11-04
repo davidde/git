@@ -134,6 +134,10 @@ function gcf {
   git config @args
 }
 
+function gcfaa {
+  git config agent.autocommit @args
+}
+
 function gcfg {
   git config --global @args
 }
